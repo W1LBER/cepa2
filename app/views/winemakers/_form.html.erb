@@ -1,0 +1,42 @@
+<%= form_with(model: winemaker, local: true) do |form| %>
+  <% if winemaker.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(winemaker.errors.count, "error") %> prohibited this winemaker from being saved:</h2>
+
+      <ul>
+      <% winemaker.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :age %>
+    <%= form.number_field :age %>
+  </div>
+
+  <div class="field">
+    <%= form.label :country %>
+    <%= form.text_field :country %>
+  </div>
+
+  <div class="field">
+    <%= form.label :position_id %>
+    <%= form.select :position_id, options_from_collection_for_select(@positions, :id, :name) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :magazine_id %>
+    <%= form.select :magazine_id, options_from_collection_for_select(@magazines, :id, :name)  %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

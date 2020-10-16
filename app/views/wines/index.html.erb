@@ -18,12 +18,12 @@
       <tr>
         <td><%= wine.name %></td>
         <td>
+          <ul>
           <%wine.cepas.order(name: :asc).each do |cepa|%>
 
-            <ul>
               <li><%=cepa.name%></li>
-            </ul>
           <%end%>
+          </ul>
         </td>
         <td><%= wine.score %></td>
         <td><%= form_with(url: wine_cepas_path(wine), local: true) do |f|%>

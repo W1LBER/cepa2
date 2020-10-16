@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @winemaker.name %>
+</p>
+
+<p>
+  <strong>Age:</strong>
+  <%= @winemaker.age %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @winemaker.country %>
+</p>
+
+<p>
+  <strong>Position:</strong>
+  <%= @winemaker.position %>
+</p>
+
+<p>
+  <strong>Magazine:</strong>
+  <%= @winemaker.magazine %>
+</p>
+
+<%= link_to 'Edit', edit_winemaker_path(@winemaker) %> |
+<%= link_to 'Back', winemakers_path %>

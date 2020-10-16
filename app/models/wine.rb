@@ -1,4 +1,6 @@
 class Wine < ApplicationRecord
-  validates :score, :inclusion => { :in => 0..100 }
   has_and_belongs_to_many :cepas
+
+  has_many :wine_winemakers
+  has_many :winemakers, through: :wine_winemakers
 end

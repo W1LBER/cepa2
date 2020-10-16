@@ -26,6 +26,7 @@ class WinemakersController < ApplicationController
   # POST /winemakers
   # POST /winemakers.json
   def create
+
     @winemaker = Winemaker.new(winemaker_params)
 
     respond_to do |format|

@@ -20,11 +20,13 @@ class WinesController < ApplicationController
 
   # GET /wines/1/edit
   def edit
+     @winemakers = Winemaker.all
   end
 
   # POST /wines
   # POST /wines.json
   def create
+
     @wine = Wine.new(wine_params)
 
     respond_to do |format|
@@ -32,21 +34,31 @@ class WinesController < ApplicationController
         format.html { redirect_to @wine, notice: 'Wine was successfully created.' }
         format.json { render :show, status: :created, location: @wine }
       else
-        format.html { render :new }
+        format.html { redirect_back fallback_location: "/" }
         format.json { render json: @wine.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def add_winemaker
+    @win = Wine.find(params[:id])
+    @maker = Winemaker.find(params[:winemaker])
+    @win.winemakers << @maker
+
+    redirect_back fallback_location: "/", notice: 'Winemaker agregado correctamente!'
   end
 
   # PATCH/PUT /wines/1
   # PATCH/PUT /wines/1.json
   def update
     respond_to do |format|
+
+
       if @wine.update(wine_params)
         format.html { redirect_to @wine, notice: 'Wine was successfully updated.' }
         format.json { render :show, status: :ok, location: @wine }
       else
-        format.html { render :edit }
+        format.html { redirect_back fallback_location: "/" }
         format.json { render json: @wine.errors, status: :unprocessable_entity }
       end
     end
@@ -57,7 +69,7 @@ class WinesController < ApplicationController
   def destroy
     @wine.destroy
     respond_to do |format|
-      format.html { redirect_to wines_url, notice: 'Wine was successfully destroyed.' }
+      format.html { redirect_back fallback_location: "/", notice: 'Wine was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

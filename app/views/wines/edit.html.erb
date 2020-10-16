@@ -1,6 +1,33 @@
+<p style="color:green;"><%= notice %></p>
 <h1>Editing Wine</h1>
 
 <%= render 'form', wine: @wine %>
+
+<%= form_with(url: winemaker_wines_path(@wine), local: true) do |form|%>
+  <%winemakers_filter = @winemakers.reject{|x| @wine.winemakers.include?(x) }  %>
+  <%=form.label :winemakers%>
+  <%=form.select :winemaker, options_from_collection_for_select(winemakers_filter, :id, :name)%>
+  <%=form.submit :add%>
+<%end%>
+
+<h4>Winemakers</h4>
+<table>
+  <tr>
+    <th>Nombre</th>
+    <th>Edad</th>
+    <th>Nacionalidad</th>
+  </tr>
+<%@wine.winemakers.each do |winemaker|%>
+  <tr>
+    <td><%=winemaker.name%></td>
+    <td><%=winemaker.age%></td>
+    <td><%=winemaker.country%></td>
+    <td>
+      <%=winemaker.magazine.name%>
+    </td>
+  </tr>
+<%end%>
+</table>
 
 <%= link_to 'Show', @wine %> |
 <%= link_to 'Back', wines_path %>

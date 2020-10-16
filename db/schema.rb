@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_16_014231) do
+ActiveRecord::Schema.define(version: 2020_10_16_021453) do
 
   create_table "cepas", force: :cascade do |t|
     t.string "name"
@@ -33,6 +33,15 @@ ActiveRecord::Schema.define(version: 2020_10_16_014231) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "wine_winemakers", force: :cascade do |t|
+    t.integer "winemaker_id"
+    t.integer "wine_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["wine_id"], name: "index_wine_winemakers_on_wine_id"
+    t.index ["winemaker_id"], name: "index_wine_winemakers_on_winemaker_id"
   end
 
   create_table "winemakers", force: :cascade do |t|

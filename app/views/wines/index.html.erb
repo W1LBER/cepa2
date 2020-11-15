@@ -2,6 +2,7 @@
 
 <h1>Wines</h1>
 
+<% if user_signed_in? %>
 <table>
   <thead>
     <tr>
@@ -26,19 +27,31 @@
           </ul>
         </td>
         <td><%= wine.score %></td>
+        <% if current_user.admin %>
+
         <td><%= form_with(url: wine_cepas_path(wine), local: true) do |f|%>
               <%= f.text_field :name%> 
               <%= f.submit :Add%>
             <%end%>
         </td>
+          
         <td><%= link_to 'Show', wine %></td>
         <td><%= link_to 'Edit', edit_wine_path(wine) %></td>
         <td><%= link_to 'Destroy', wine, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
+<% else %>
+  <h1>Iniciar sesion para ver el contenido</h1>
+<% end %>
+
 <br>
 
-<%= link_to 'New Wine', new_wine_path %>
+<% if user_signed_in?%>
+  <% if current_user.admin %>
+    <%= link_to 'New Wine', new_wine_path %>
+  <% end %>
+<% end %>

@@ -6,6 +6,7 @@ class WinesController < ApplicationController
   def index
     @wines = Wine.all
     @cepa = Cepa.new
+
   end
 
   # GET /wines/1
